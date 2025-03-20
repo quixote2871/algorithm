@@ -39,7 +39,17 @@ public:
 		for(int i=0; i<hull.size(); i++)
 			cout << "[" << hull[i].x << ", " << hull[i].y << "]\n";
 	}
-	vector<Point> get_hull() {
-		return hull;
+	unsigned int size() {
+		return hull.size();
+	}
+	Point operator[](int k) {
+		return hull[k];
+	}
+	bool is_included(Point P) {
+		int n = hull.size();
+		for(int i=0; i<n; i++)
+			if(ccw(hull[i], hull[(i+1)%n], P)<0)
+				return false;
+		return true;
 	}
 };
